@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Rock Paper Scissor</title>
+  </head>
+  <body>
+    <p> Wanna play? Whoever reaches 5 points first wins. Choose your weapon of choice:</p>
+    <div id="container">
+        <button id="rock">Rock</button>
+        <button id="paper">Paper</button>
+        <button id="scissor">Scissor</button>
+    </div>
+    <div id="div1">
+      <p id = "choice"></p>
+      <p id = "outcome"></p>
+      <p id = "computerScore"></p>
+      <p id = "humanScore"></p>
+
+    </div>
+  </body>
+
+  <script>
+
+    let humanScore = 0;
+    let computerScore = 0;
+
+      // buttons is a node list. It looks and acts much like an array.
+    const buttons = document.querySelectorAll('button');
+
+    // we use the .forEach method to iterate through each button
+    buttons.forEach((button) => {
+
+    // and for each one we add a 'click' listener
+    button.addEventListener('click', (e) => {
+      playRound(button.id);
+    });
+    });
+
+    function reset() {
+      document.getElementById("outcome").innerHTML = "";
+      document.getElementById("choice").innerHTML = "";
+      humanScore = 0;
+      computerScore = 0;
+    }
+
+    function humanWins() {
+      humanScore = humanScore + 1;
+      document.getElementById("outcome").innerHTML = "You win.";
+      if (humanScore == 5) {
+        alert("Human won five points. The game is done.");
+        reset()
+      }
+    }
+
+    function computerWins() {
+      computerScore = computerScore + 1;
+      document.getElementById("outcome").innerHTML = "Computer wins.";
+      if (computerScore == 5) {
+        alert("Computer won five points. The game is done.");
+        reset()
+      }
+    }
+
+    function tie() {
+      document.getElementById("outcome").innerHTML = "It's a tie.";
+    }
+
+    function generateComputerChoice() {
+      let randomNumber = Math.floor(Math.random() * 3) + 1;
+      if (randomNumber == 1) {
+        return ("rock");
+      }
+      else if (randomNumber == 2) {
+        return ("paper");
+      }
+      else {
+        return ("scissor");
+      }
+    }
+
+    function playRound(input) {
+
+      let computerChoice = generateComputerChoice();
+      let humanChoice = input;
+
+      document.getElementById("choice").innerHTML = "You chose " + humanChoice + ", and the computer chose " + computerChoice + ".";
+
+      if (humanChoice !== "rock" && humanChoice !== "paper" && humanChoice !== "scissor") {
+        return ("invalidEntry");
+      }
+      else {
+        if (computerChoice === "rock") {
+          if (humanChoice === "paper") {
+            humanWins();
+          }
+          else if (humanChoice === "scissor") {
+            computerWins();
+          }
+          else {
+            tie();
+          }
+        }
+        else if (computerChoice === "paper") {
+          if (humanChoice === "rock") {
+            computerWins();
+          }
+          else if (humanChoice === "scissor") {
+            humanWins();
+          }
+          else {
+            tie();
+          }
+        }
+        else if (computerChoice === "scissor") {
+          if (humanChoice === "rock") {
+            humanWins();
+
+          }
+          else if (humanChoice === "paper") {
+            computerWins();
+          }
+          else {
+            tie();
+          }
+        }
+      }
+      document.getElementById("computerScore").innerHTML = "The computer's score is " + computerScore + ".";
+      document.getElementById("humanScore").innerHTML = "Your score is " + humanScore + ".";
+    }
+
+    function game() {
+      let humanScore = 0;
+      let computerScore = 0;
+      let i;
+      for (i = 1; i < 6; i++) {
+        console.log("\n Round Nr. " + i);
+        let result = playRound();
+        if (result == "playerWins") {
+           humanScore = humanScore + 1;
+           console.log("Human beats computer");
+         }
+        else if (result == "computerWins") {
+          computerScore = computerScore + 1;
+          console.log("Computer beats human");
+        }
+        else {
+          console.log("It's a tie");
+        }
+         console.log("Human Score: " + humanScore);
+         console.log("Computer Score: " + computerScore);
+       }
+      if (humanScore > computerScore) {
+        console.log("Human wins");
+      }
+      else if (humanScore < computerScore) {
+        console.log("Computer wins");
+      }
+      else {
+        console.log("Nobody wins");
+      }
+     }
+
+  </script>
+</html>
