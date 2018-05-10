@@ -4,28 +4,32 @@
     <title>Rock Paper Scissor</title>
   </head>
   <body>
-    <p> Wanna play? Whoever reaches 5 points first wins. Choose your weapon of choice:</p>
     <div id="firstSlide">
       <p>Welcome to rock, paper, scissor. Wanna play?</p>
       <button id="letsPlay">Let's play</button>
     </div>
     <div id="secondSlide" style = "visibility:hidden">
+      <p> Your options: </p>
       <div id = "choices">
         <button id="rock" >Rock</button>
         <button id="paper">Paper</button>
         <button id="scissor">Scissor</button>
       </div>
+        <div id="div1">
+          <p id="choice"></p>
+          <p id="outcome"></p>
+          <p id="score"></p>
+        </div>
     </div>
-    <div id="div1">
-      <p id="choice"></p>
-      <p id="outcome"></p>
-      <p id="computerScore"></p>
-      <p id="humanScore"></p>
+    <div id="thirdSlide" style = "visibility:hidden">
+      <p id="finalScore"></p>
+      <p id="winner"></p>
+      <button id="playAgain" onclick="location.reload()">Play again</button>
     </div>
   </body>
 
   <script>
-  
+
     let humanScore = 0;
     let computerScore = 0;
 
@@ -49,19 +53,18 @@
     });
     });
 
-    function reset() {
-      document.getElementById("outcome").innerHTML = "";
-      document.getElementById("choice").innerHTML = "";
-      humanScore = 0;
-      computerScore = 0;
+    function openThirdSlide() {
+      document.getElementById("secondSlide").style.display = "none";
+      document.getElementById("thirdSlide").style.visibility = "visible";
+      document.getElementById("finalScore").innerHTML = "Your score is " + humanScore + ", and the computer's score is " + computerScore;
     }
 
     function humanWins() {
       humanScore = humanScore + 1;
       document.getElementById("outcome").innerHTML = "You win.";
       if (humanScore == 5) {
-        alert("Human won five points. The game is done.");
-        reset()
+        document.getElementById("winner").innerHTML = "You won!";
+        openThirdSlide()
       }
     }
 
@@ -69,8 +72,8 @@
       computerScore = computerScore + 1;
       document.getElementById("outcome").innerHTML = "Computer wins.";
       if (computerScore == 5) {
-        alert("Computer won five points. The game is done.");
-        reset()
+        document.getElementById("winner").innerHTML = "Computer won";
+        openThirdSlide()
       }
     }
 
@@ -133,8 +136,7 @@
           }
         }
       }
-      document.getElementById("computerScore").innerHTML = "The computer's score is " + computerScore + ".";
-      document.getElementById("humanScore").innerHTML = "Your score is " + humanScore + ".";
+      document.getElementById("score").innerHTML = "Your score is " + humanScore + ", and the computer's score is " + computerScore + ".";
     }
   </script>
 </html>
