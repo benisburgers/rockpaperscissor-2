@@ -49,6 +49,10 @@ table {
 
 /*My own stylesheet starts here*/
 
+body {
+  background-color: red;
+}
+
 h1 {
     font-size : 14pt;
     line-height : 100%;
