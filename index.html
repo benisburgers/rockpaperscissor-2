@@ -2,13 +2,18 @@
 <html>
   <head>
     <title>Rock Paper Scissor</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="rset.css">
+
   </head>
   <body>
+    <h1>Rock, paper, scissor</h1>
     <div id="firstSlide">
       <p>Welcome to rock, paper, scissor. Wanna play?</p>
       <button id="letsPlay">Let's play</button>
     </div>
     <div id="secondSlide" style = "visibility:hidden">
+      <p>Rules: Rock beats scissor, paper beats rock, scissor beats paper</p>
       <p> Your options: </p>
       <div id = "choices">
         <button id="rock" >Rock</button>
@@ -16,7 +21,10 @@
         <button id="scissor">Scissor</button>
       </div>
         <div id="div1">
-          <p id="choice"></p>
+          <div id="choice">
+            <span id="humanChoice"></span>
+            <span id="computerChoice"></span>
+          </div>
           <p id="outcome"></p>
           <p id="score"></p>
         </div>
@@ -97,7 +105,8 @@
     function playRound(input) {
       let computerChoice = generateComputerChoice();
       let humanChoice = input;
-      document.getElementById("choice").innerHTML = "You chose " + humanChoice + ", and the computer chose " + computerChoice + ".";
+      document.getElementById("humanChoice").innerHTML = "You chose " + humanChoice
+      document.getElementById("computerChoice").innerHTML = "The computer chose " + computerChoice;
       if (humanChoice !== "rock" && humanChoice !== "paper" && humanChoice !== "scissor") {
         return ("invalidEntry");
       }
