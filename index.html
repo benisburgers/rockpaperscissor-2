@@ -13,23 +13,28 @@
       <button id="letsPlay">Let's play</button>
     </div>
     <div id="secondSlide" style = "visibility:hidden">
-      <p>Rules: Rock beats scissor, paper beats rock, scissor beats paper</p>
-      <p> Your options: </p>
+      <p>Rules: Rock beats scissor, paper beats rock, scissor beats paper.</p>
+      <p>First to reach five points wins.</p>
+      <p>Your options: </p>
       <div id = "choices">
         <button id="rock" >Rock</button>
         <button id="paper">Paper</button>
         <button id="scissor">Scissor</button>
       </div>
-        <div id="div1">
-          <div id="choice">
-            <span id="humanChoice"></span>
-            <span id="computerChoice"></span>
+        <div id="progress">
+          <div id="choice" style = "visibility: hidden">
+            <p id="humanChoiceContainer">You chose <span id="humanChoice"></span></p>
+            <p id="computerChoiceContainer">The computer chose <span id="computerChoice"></span></p>
           </div>
           <p id="outcome"></p>
           <p id="score"></p>
         </div>
     </div>
     <div id="thirdSlide" style = "visibility:hidden">
+      <div id="choice">
+        <p id="humanChoiceContainer">You chose <span id="humanChoice"></span></p>
+        <p id="computerChoiceContainer">The computer chose <span id="computerChoice"></span></p>
+      </div>
       <p id="finalScore"></p>
       <p id="winner"></p>
       <button id="playAgain" onclick="location.reload()">Play again</button>
@@ -64,7 +69,7 @@
     function openThirdSlide() {
       document.getElementById("secondSlide").style.display = "none";
       document.getElementById("thirdSlide").style.visibility = "visible";
-      document.getElementById("finalScore").innerHTML = "Your score is " + humanScore + ", and the computer's score is " + computerScore;
+      document.getElementById("finalScore").innerHTML = "Your score is " + humanScore + ", and the computer's score is " + computerScore + ".";
     }
 
     function humanWins() {
@@ -80,7 +85,7 @@
       computerScore = computerScore + 1;
       document.getElementById("outcome").innerHTML = "Computer wins.";
       if (computerScore == 5) {
-        document.getElementById("winner").innerHTML = "Computer won";
+        document.getElementById("winner").innerHTML = "Computer won!";
         openThirdSlide()
       }
     }
@@ -105,8 +110,10 @@
     function playRound(input) {
       let computerChoice = generateComputerChoice();
       let humanChoice = input;
-      document.getElementById("humanChoice").innerHTML = "You chose " + humanChoice
-      document.getElementById("computerChoice").innerHTML = "The computer chose " + computerChoice;
+      document.getElementById("choice").style.visibility = "visible";
+
+      document.getElementById("humanChoice").innerHTML = humanChoice;
+      document.getElementById("computerChoice").innerHTML = computerChoice;
       if (humanChoice !== "rock" && humanChoice !== "paper" && humanChoice !== "scissor") {
         return ("invalidEntry");
       }
